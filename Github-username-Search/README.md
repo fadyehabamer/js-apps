@@ -1,18 +1,11 @@
-# Github username search app
-> this app will allow you to search for Github users and display some of their repos
-#### Features
-- search for user
-- display some of their repos
-- show stars of this repo
-- direct link to visit this repo
+# Github-username-Search
 
-#### Technolgies used
-- HTML
-- CSS
-- Javascript
-- Sweet Alert
-- Github API
+search for Github users and display some of their repos
 
-#### issues 
-- not responsive
-- I cant handle, when user search for an invalid username
+### 🔗 [View Live Demo](https://fadyehabamer.github.io/js-apps/Github-username-Search/)
+
+**Built with:** JavaScript
+**Topics:** `github`, `api`, `javascript`, `repository`, `search`
+
+---
+↩ Part of the [**js-apps**](../) collection · [all collections](https://github.com/fadyehabamer?tab=repositories) · [@fadyehabamer](https://github.com/fadyehabamer)

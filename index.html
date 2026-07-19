@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>js-apps — Fady Ehab Amer</title>
+<style>
+  :root{--bg:#0d1117;--card:#161b22;--border:#30363d;--ink:#e6edf3;--muted:#8b949e;--accent:#58a6ff}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.5}
+  .wrap{max-width:1000px;margin:0 auto;padding:48px 24px}
+  header{border-bottom:1px solid var(--border);padding-bottom:20px;margin-bottom:28px}
+  h1{margin:0 0 6px;font-size:28px;font-family:ui-monospace,"SF Mono",Menlo,monospace;color:var(--accent)}
+  p.sub{margin:0;color:var(--muted);font-size:15px}
+  .count{display:inline-block;margin-top:10px;font-family:ui-monospace,monospace;font-size:12px;
+    color:var(--muted);border:1px solid var(--border);border-radius:20px;padding:3px 12px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+  .card{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);
+    background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px;
+    font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:13.5px;transition:border-color .15s,transform .15s}
+  .card:hover{border-color:var(--accent);transform:translateY(-2px)}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none}
+  footer{margin-top:36px;padding-top:20px;border-top:1px solid var(--border);
+    color:var(--muted);font-size:13px}
+  a.home{color:var(--accent);text-decoration:none}
+</style></head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>js-apps</h1>
+      <p class="sub">js-apps — live demos</p>
+      <div class="count">7 live demos</div>
+    </header>
+    <div class="grid">
+    <a class="card" href="./EndOfTheYear-Countdown/"><span class="dot"></span>EndOfTheYear-Countdown</a>
+    <a class="card" href="./FireFox-ReBrand/"><span class="dot"></span>FireFox-ReBrand</a>
+    <a class="card" href="./Github-username-Search/"><span class="dot"></span>Github-username-Search</a>
+    <a class="card" href="./LocalStorage-Explained/"><span class="dot"></span>LocalStorage-Explained</a>
+    <a class="card" href="./MovieSearch/"><span class="dot"></span>MovieSearch</a>
+    <a class="card" href="./Todo-App/"><span class="dot"></span>Todo-App</a>
+    <a class="card" href="./foxir-personal-website/"><span class="dot"></span>foxir-personal-website</a>
+    </div>
+    <footer>
+      Part of <a class="home" href="https://github.com/fadyehabamer">@fadyehabamer</a>'s curated collections ·
+      <a class="home" href="https://github.com/fadyehabamer/js-apps">source</a>
+    </footer>
+  </div>
+</body></html>

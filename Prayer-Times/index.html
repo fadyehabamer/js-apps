@@ -21,7 +21,7 @@
             <p class="subtitle" data-i18n="subtitle">Today's prayer times for a city, from the Aladhan API.</p>
         </header>
 
-        <form id="city-form" class="card search">
+        <form id="city-form" class="card search" novalidate>
             <div class="field">
                 <label for="city" data-i18n="city">City</label>
                 <input type="text" id="city" name="city" autocomplete="address-level2" placeholder="Cairo" required>
@@ -44,7 +44,9 @@
             <button type="submit" id="submit-btn" data-i18n="submit">Get times</button>
         </form>
 
-        <section class="card results" id="results" aria-labelledby="results-title">
+        <p class="status" id="status" role="status" aria-live="polite"></p>
+
+        <section class="card results" id="results" aria-labelledby="results-title" hidden>
             <h2 id="results-title" data-i18n="results">Times</h2>
             <p class="meta" id="date-line"></p>
             <div class="next" id="next-box" hidden>

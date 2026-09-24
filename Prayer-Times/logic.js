@@ -116,6 +116,13 @@
             language: "Language",
             loading: "Loading...",
             loadFailed: "Could not load prayer times.",
+            missingCity: "Enter a city name.",
+            missingCountry: "Enter a country name.",
+            notFound: "Couldn't find that city. Check the spelling or try the country's English name.",
+            offline: "You're offline. Connect to the internet to load new times.",
+            network: "Couldn't reach the prayer times service. Try again in a moment.",
+            timeout: "The request took too long. Try again.",
+            service: "The prayer times service returned an error. Try again later.",
             next: "Next: {name} in",
             nextTomorrow: "Next: {name} (tomorrow) in",
             method5: "Egyptian General Authority of Survey",
@@ -142,6 +149,13 @@
             language: "اللغة",
             loading: "جارٍ التحميل...",
             loadFailed: "تعذّر تحميل مواقيت الصلاة.",
+            missingCity: "اكتب اسم المدينة.",
+            missingCountry: "اكتب اسم الدولة.",
+            notFound: "لم نعثر على هذه المدينة. تأكد من الكتابة أو جرّب الاسم بالإنجليزية.",
+            offline: "أنت غير متصل بالإنترنت. اتصل لتحميل مواقيت جديدة.",
+            network: "تعذّر الوصول إلى خدمة المواقيت. حاول مرة أخرى بعد قليل.",
+            timeout: "استغرق الطلب وقتًا طويلًا. حاول مرة أخرى.",
+            service: "حدث خطأ في خدمة المواقيت. حاول لاحقًا.",
             next: "الصلاة القادمة: {name} بعد",
             nextTomorrow: "الصلاة القادمة: {name} (غدًا) بعد",
             method5: "الهيئة المصرية العامة للمساحة",
@@ -158,6 +172,33 @@
             Isha: "العشاء"
         }
     };
+
+    function validateQuery(city, country) {
+        if (!String(city || "").trim()) {
+            return "missingCity";
+        }
+        if (!String(country || "").trim()) {
+            return "missingCountry";
+        }
+        return "";
+    }
+
+    function classifyError(error, online) {
+        if (online === false) {
+            return "offline";
+        }
+        if (error && error.name === "AbortError") {
+            return "timeout";
+        }
+        if (error && error.name === "TypeError") {
+            return "network";
+        }
+        const message = String(error && error.message || "");
+        if (/geocode|city|address/i.test(message)) {
+            return "notFound";
+        }
+        return "service";
+    }
 
     function translate(lang, key, vars) {
         const table = STRINGS[lang] || STRINGS.en;
@@ -177,6 +218,8 @@
         findNextPrayer,
         formatCountdown,
         STRINGS,
-        translate
+        translate,
+        validateQuery,
+        classifyError
     };
 });

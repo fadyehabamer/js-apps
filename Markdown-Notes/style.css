@@ -287,3 +287,48 @@ button.danger:hover {
     background-color: var(--bg);
     color: var(--ink);
 }
+
+:focus-visible {
+    outline: 3px solid #f59f00;
+    outline-offset: 2px;
+}
+
+#editor:focus-visible,
+.note-item:focus-visible {
+    outline-offset: -3px;
+}
+
+@media (max-width: 760px) {
+    .app {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto 1fr;
+        grid-template-areas:
+            "top"
+            "side"
+            "main";
+    }
+
+    .sidebar {
+        max-height: 35vh;
+        border-inline-end: none;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .workspace {
+        grid-template-columns: 1fr;
+    }
+
+    #editor {
+        min-height: 40vh;
+    }
+
+    .topbar {
+        flex-wrap: wrap;
+    }
+
+    .save-state {
+        order: 3;
+        flex-basis: 100%;
+        margin-inline-start: 0;
+    }
+}

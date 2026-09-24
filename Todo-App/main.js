@@ -12,8 +12,8 @@ window.onload = () => {
 
 // add tasks !
 addbtn.onclick = () => {
-    // if input is empty
-    if (input.value == "") {
+    // if input is empty (or only spaces)
+    if (input.value.trim() == "") {
         Swal.fire({
               title: 'Can not make Empty Task !',
               width: 600,

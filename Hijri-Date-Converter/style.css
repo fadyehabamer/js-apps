@@ -101,3 +101,12 @@ button:hover {
 .date-ar {
     font-size: 1.2rem;
 }
+
+.error {
+    color: var(--error);
+    font-weight: 600;
+}
+
+[aria-invalid="true"] {
+    border-color: var(--error);
+}

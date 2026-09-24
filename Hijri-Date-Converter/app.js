@@ -5,6 +5,10 @@ const {
     toHijriParts,
     hijriToGregorian,
     hijriMonthNames,
+    validateHijri,
+    validateGregorian,
+    MIN_HIJRI_YEAR,
+    MAX_HIJRI_YEAR,
     formatHijri,
     formatGregorian
 } = HijriLogic;
@@ -59,12 +63,29 @@ function renderResult(container, lines) {
     }
 }
 
+function showError(container, message, inputs) {
+    container.replaceChildren();
+    const p = document.createElement("p");
+    p.className = "error";
+    p.setAttribute("role", "alert");
+    p.textContent = message;
+    container.appendChild(p);
+    inputs.forEach((input) => input.setAttribute("aria-invalid", "true"));
+}
+
+function clearInvalid(inputs) {
+    inputs.forEach((input) => input.removeAttribute("aria-invalid"));
+}
+
 g2hForm.addEventListener("submit", (event) => {
     event.preventDefault();
     const date = parseIsoDate(gDateInput.value);
-    if (!date) {
+    const error = validateGregorian(date);
+    if (error) {
+        showError(g2hResult, error, [gDateInput]);
         return;
     }
+    clearInvalid([gDateInput]);
     renderResult(g2hResult, [
         { text: formatHijri(date, "en"), lang: "en" },
         { text: formatHijri(date, "ar"), lang: "ar" }
@@ -73,15 +94,24 @@ g2hForm.addEventListener("submit", (event) => {
 
 h2gForm.addEventListener("submit", (event) => {
     event.preventDefault();
-    const date = hijriToGregorian(Number(hYearInput.value), Number(hMonthSelect.value), Number(hDayInput.value));
-    if (!date) {
+    const fields = [hDayInput, hMonthSelect, hYearInput];
+    const year = hYearInput.value.trim() === "" ? NaN : Number(hYearInput.value);
+    const month = Number(hMonthSelect.value);
+    const day = hDayInput.value.trim() === "" ? NaN : Number(hDayInput.value);
+    const error = validateHijri(year, month, day);
+    if (error) {
+        showError(h2gResult, error, fields);
         return;
     }
+    clearInvalid(fields);
+    const date = hijriToGregorian(year, month, day);
     renderResult(h2gResult, [
         { text: formatGregorian(date, "en"), lang: "en" },
         { text: formatGregorian(date, "ar"), lang: "ar" }
     ]);
 });
 
+hYearInput.min = String(MIN_HIJRI_YEAR);
+hYearInput.max = String(MAX_HIJRI_YEAR);
 fillMonths();
 showToday();

@@ -104,6 +104,41 @@
         return null;
     }
 
+    const MIN_HIJRI_YEAR = 1300;
+    const MAX_HIJRI_YEAR = 1600;
+
+    function daysInHijriMonth(year, month) {
+        return hijriToGregorian(year, month, 30) ? 30 : 29;
+    }
+
+    function validateHijri(year, month, day) {
+        if (!Number.isInteger(year) || !Number.isInteger(month) || !Number.isInteger(day)) {
+            return "Enter a whole number for the day, month and year.";
+        }
+        if (year < MIN_HIJRI_YEAR || year > MAX_HIJRI_YEAR) {
+            return `Year must be between ${MIN_HIJRI_YEAR} and ${MAX_HIJRI_YEAR} AH.`;
+        }
+        if (month < 1 || month > 12) {
+            return "Month must be between 1 and 12.";
+        }
+        const length = daysInHijriMonth(year, month);
+        if (day < 1 || day > length) {
+            return `This month has ${length} days in ${year} AH.`;
+        }
+        return "";
+    }
+
+    function validateGregorian(date) {
+        if (!date) {
+            return "Pick a valid date.";
+        }
+        const year = toHijriParts(date).year;
+        if (year < MIN_HIJRI_YEAR || year > MAX_HIJRI_YEAR) {
+            return "That date is outside the range the Umm al-Qura calendar covers.";
+        }
+        return "";
+    }
+
     function hijriMonthNames(lang) {
         const formatter = new Intl.DateTimeFormat(HIJRI_LOCALES[lang], { month: "long", timeZone: "UTC" });
         const names = [];
@@ -122,6 +157,11 @@
         parseIsoDate,
         toIsoDate,
         hijriToGregorian,
-        hijriMonthNames
+        hijriMonthNames,
+        daysInHijriMonth,
+        validateHijri,
+        validateGregorian,
+        MIN_HIJRI_YEAR,
+        MAX_HIJRI_YEAR
     };
 });

@@ -18,10 +18,16 @@
 
         <form id="zakat-form" class="card">
             <fieldset>
-                <legend>Gold price</legend>
-                <div class="field">
-                    <label for="gold-price">Price of 1 g of 24k gold</label>
-                    <input type="text" id="gold-price" name="gold-price" inputmode="decimal" autocomplete="off">
+                <legend>Currency and gold price</legend>
+                <div class="grid">
+                    <div class="field">
+                        <label for="currency">Currency</label>
+                        <select id="currency" name="currency"></select>
+                    </div>
+                    <div class="field">
+                        <label for="gold-price">Price of 1 g of 24k gold</label>
+                        <input type="text" id="gold-price" name="gold-price" inputmode="decimal" autocomplete="off">
+                    </div>
                 </div>
             </fieldset>
 
@@ -57,6 +63,19 @@
         <section class="card result" id="result" aria-labelledby="result-title" aria-live="polite">
             <h2 id="result-title">Result</h2>
             <p id="summary">Fill in the gold price and what you own, then press Calculate.</p>
+            <div class="table-wrap">
+                <table id="breakdown" hidden>
+                    <caption class="visually-hidden">Breakdown of zakatable wealth</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Item</th>
+                            <th scope="col" class="num">Value</th>
+                        </tr>
+                    </thead>
+                    <tbody id="breakdown-body"></tbody>
+                    <tfoot id="breakdown-foot"></tfoot>
+                </table>
+            </div>
         </section>
     </main>
 

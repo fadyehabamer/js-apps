@@ -35,7 +35,19 @@
         };
     }
 
+    const CURRENCIES = ["EGP", "SAR", "AED", "KWD", "QAR", "USD", "EUR", "GBP"];
+
+    function formatMoney(value, currency, locale) {
+        return new Intl.NumberFormat(locale || "en", {
+            style: "currency",
+            currency,
+            currencyDisplay: "code"
+        }).format(value);
+    }
+
     return {
+        CURRENCIES,
+        formatMoney,
         NISAB_GOLD_GRAMS,
         ZAKAT_RATE,
         roundMoney,

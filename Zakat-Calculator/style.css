@@ -105,3 +105,63 @@ button:hover {
     font-size: 1.2rem;
     margin-bottom: 8px;
 }
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+#summary {
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.table-wrap {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    text-align: start;
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--border);
+}
+
+thead th {
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
+tbody th {
+    font-weight: 400;
+}
+
+.num {
+    text-align: end;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+tfoot .total th,
+tfoot .total td {
+    font-weight: 700;
+    border-top: 2px solid var(--ink);
+}
+
+tfoot .zakat th,
+tfoot .zakat td {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--accent-dark);
+    background-color: #e3f1e8;
+    border-bottom: none;
+}

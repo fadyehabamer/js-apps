@@ -188,3 +188,30 @@ button {
     color: var(--muted);
     cursor: wait;
 }
+
+.field-error {
+    min-height: 1.2em;
+    font-size: 0.85rem;
+    color: var(--error);
+}
+
+input[aria-invalid="true"] {
+    border-color: var(--error);
+}
+
+.status {
+    padding: 10px 14px;
+    border-radius: 10px;
+    margin-bottom: 16px;
+    font-weight: 600;
+}
+
+.status.warn {
+    background-color: var(--warn-bg);
+    color: var(--warn-ink);
+}
+
+.status.error {
+    background-color: #fdecea;
+    color: var(--error);
+}

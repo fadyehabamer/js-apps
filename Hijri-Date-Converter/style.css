@@ -1,0 +1,160 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --bg: #f4f1ea;
+    --card: #ffffff;
+    --ink: #1f2a2e;
+    --muted: #5c6b70;
+    --accent: #0f6e5a;
+    --accent-dark: #0a4f41;
+    --border: #d9d3c5;
+    --error: #b3261e;
+}
+
+body {
+    font-family: system-ui, -apple-system, "Segoe UI", Tahoma, sans-serif;
+    background-color: var(--bg);
+    color: var(--ink);
+    line-height: 1.5;
+}
+
+.container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 32px 16px 48px;
+}
+
+.page-header {
+    margin-bottom: 24px;
+}
+
+.page-header h1 {
+    font-size: 1.8rem;
+    color: var(--accent-dark);
+}
+
+.subtitle {
+    color: var(--muted);
+}
+
+.card {
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.card h2 {
+    font-size: 1.15rem;
+    margin-bottom: 12px;
+}
+
+.converter {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 12px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+label {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+input,
+select,
+button {
+    font: inherit;
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background-color: #fff;
+    color: var(--ink);
+}
+
+button {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: var(--accent-dark);
+}
+
+.result {
+    margin-top: 16px;
+}
+
+.date-ar {
+    font-size: 1.2rem;
+}
+
+.error {
+    color: var(--error);
+    font-weight: 600;
+}
+
+[aria-invalid="true"] {
+    border-color: var(--error);
+}
+
+:focus-visible {
+    outline: 3px solid #e0a526;
+    outline-offset: 2px;
+}
+
+.date-ar,
+[lang="ar"] {
+    font-family: "Noto Naskh Arabic", "Geeza Pro", "Segoe UI", Tahoma, sans-serif;
+    text-align: right;
+}
+
+.today .date-en:first-of-type {
+    color: var(--muted);
+}
+
+.today #today-hijri-en {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--accent-dark);
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 20px 12px 32px;
+    }
+
+    .page-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .card {
+        padding: 16px;
+    }
+
+    .converter {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .converter button {
+        width: 100%;
+    }
+
+    select {
+        width: 100%;
+    }
+}

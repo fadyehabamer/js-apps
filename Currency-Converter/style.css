@@ -1,0 +1,255 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+:root {
+    --bg: #f3f4f8;
+    --card: #ffffff;
+    --ink: #151a2d;
+    --muted: #5d6480;
+    --accent: #4338ca;
+    --accent-dark: #3730a3;
+    --border: #dcdfea;
+    --error: #b42318;
+    --warn-bg: #fff6e0;
+    --warn-ink: #7a4a00;
+}
+
+body {
+    font-family: system-ui, -apple-system, "Segoe UI", Tahoma, sans-serif;
+    background-color: var(--bg);
+    color: var(--ink);
+    line-height: 1.5;
+}
+
+.container {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 32px 16px 48px;
+}
+
+.page-header {
+    margin-bottom: 20px;
+}
+
+.page-header h1 {
+    font-size: 1.8rem;
+}
+
+.subtitle {
+    color: var(--muted);
+}
+
+.card {
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 16px;
+}
+
+.converter {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.pair {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+.pair .field {
+    flex: 1;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+label {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+input,
+select,
+button {
+    font: inherit;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background-color: #fff;
+    color: var(--ink);
+}
+
+#amount {
+    font-size: 1.4rem;
+    font-variant-numeric: tabular-nums;
+}
+
+.converted {
+    font-size: 1.8rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    overflow-wrap: anywhere;
+}
+
+.rate {
+    color: var(--muted);
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+.swap {
+    flex: none;
+    width: 46px;
+    height: 46px;
+    padding: 0;
+    font-size: 1.3rem;
+    line-height: 1;
+    border-radius: 50%;
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+    cursor: pointer;
+}
+
+.swap:hover {
+    background-color: var(--accent-dark);
+}
+
+.small-title {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-bottom: 8px;
+}
+
+.others {
+    list-style: none;
+}
+
+.others li {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.others li:last-child {
+    border-bottom: none;
+}
+
+.others strong {
+    font-variant-numeric: tabular-nums;
+}
+
+.meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px 12px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    font-size: 0.9rem;
+    color: var(--muted);
+}
+
+.link-btn {
+    padding: 4px 8px;
+    border: none;
+    background: none;
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.link-btn:disabled {
+    color: var(--muted);
+    cursor: wait;
+}
+
+.field-error {
+    min-height: 1.2em;
+    font-size: 0.85rem;
+    color: var(--error);
+}
+
+input[aria-invalid="true"] {
+    border-color: var(--error);
+}
+
+.status {
+    padding: 10px 14px;
+    border-radius: 10px;
+    margin-bottom: 16px;
+    font-weight: 600;
+}
+
+.status.warn {
+    background-color: var(--warn-bg);
+    color: var(--warn-ink);
+}
+
+.status.error {
+    background-color: #fdecea;
+    color: var(--error);
+}
+
+:focus-visible {
+    outline: 3px solid #f59e0b;
+    outline-offset: 2px;
+}
+
+select {
+    width: 100%;
+    min-width: 0;
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 20px 12px 32px;
+    }
+
+    .page-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .card {
+        padding: 14px;
+    }
+
+    .pair {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .swap {
+        align-self: center;
+        transform: rotate(90deg);
+    }
+
+    .converted {
+        font-size: 1.4rem;
+    }
+}

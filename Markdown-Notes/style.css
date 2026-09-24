@@ -93,3 +93,65 @@ body {
     clip: rect(0 0 0 0);
     white-space: nowrap;
 }
+
+.preview h1,
+.preview h2,
+.preview h3,
+.preview h4,
+.preview h5,
+.preview h6 {
+    line-height: 1.25;
+    margin: 1em 0 0.5em;
+}
+
+.preview h1 {
+    font-size: 1.7rem;
+}
+
+.preview h2 {
+    font-size: 1.4rem;
+}
+
+.preview h3 {
+    font-size: 1.2rem;
+}
+
+.preview > :first-child {
+    margin-top: 0;
+}
+
+.preview p,
+.preview ul,
+.preview ol,
+.preview pre {
+    margin-bottom: 0.9em;
+}
+
+.preview ul,
+.preview ol {
+    padding-inline-start: 1.5em;
+}
+
+.preview a {
+    color: var(--accent);
+}
+
+.preview code {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 0.9em;
+    background-color: var(--code-bg);
+    padding: 1px 5px;
+    border-radius: 4px;
+}
+
+.preview pre {
+    background-color: var(--code-bg);
+    padding: 12px;
+    border-radius: 8px;
+    overflow-x: auto;
+}
+
+.preview pre code {
+    padding: 0;
+    background: none;
+}

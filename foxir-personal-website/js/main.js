@@ -22,8 +22,8 @@ var typed = new Typed('.element', options);
 
  // Portfolio isotope filter
  $(document).ready(function(){
-    $('.portfolio-item').isotope(function(){
-        itemSelector:'.item'
+    $('.portfolio-item').isotope({
+        itemSelector: '.item'
       });
   
   

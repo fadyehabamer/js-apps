@@ -116,3 +116,47 @@ button {
     clip: rect(0 0 0 0);
     white-space: nowrap;
 }
+
+.swap {
+    flex: none;
+    width: 46px;
+    height: 46px;
+    padding: 0;
+    font-size: 1.3rem;
+    line-height: 1;
+    border-radius: 50%;
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+    cursor: pointer;
+}
+
+.swap:hover {
+    background-color: var(--accent-dark);
+}
+
+.small-title {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-bottom: 8px;
+}
+
+.others {
+    list-style: none;
+}
+
+.others li {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.others li:last-child {
+    border-bottom: none;
+}
+
+.others strong {
+    font-variant-numeric: tabular-nums;
+}

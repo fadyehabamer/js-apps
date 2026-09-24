@@ -26,6 +26,7 @@
                     <label for="from">From</label>
                     <select id="from" name="from"></select>
                 </div>
+                <button type="button" class="swap" id="swap" aria-label="Swap currencies" title="Swap currencies">&#8646;</button>
                 <div class="field">
                     <label for="to">To</label>
                     <select id="to" name="to"></select>
@@ -37,6 +38,11 @@
             <h2 id="result-title" class="visually-hidden">Result</h2>
             <p class="converted" id="converted" aria-live="polite"></p>
             <p class="rate" id="rate"></p>
+        </section>
+
+        <section class="card" aria-labelledby="others-title">
+            <h2 id="others-title" class="small-title">Same amount in</h2>
+            <ul class="others" id="others"></ul>
         </section>
     </main>
 

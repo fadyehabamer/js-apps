@@ -12,17 +12,41 @@ const search = document.getElementById("search");
 getMovies(APIURL);
 
 async function getMovies(url) {
-    const resp = await fetch(url);
-    const respData = await resp.json();
+    try {
+        const resp = await fetch(url);
 
-    console.log(respData);
+        if (!resp.ok) {
+            throw new Error(`TMDB request failed (${resp.status})`);
+        }
 
-    showMovies(respData.results);
+        const respData = await resp.json();
+
+        showMovies(respData.results || []);
+    } catch (error) {
+        console.error(error);
+        showMessage("Could not load movies right now, please try again later.");
+    }
+}
+
+// replace the movie grid with a single text message
+function showMessage(text) {
+    main.innerHTML = "";
+
+    const msg = document.createElement("h2");
+    msg.classList.add("message");
+    msg.textContent = text;
+
+    main.appendChild(msg);
 }
 
 function showMovies(movies) {
     // clear main
     main.innerHTML = "";
+
+    if (movies.length === 0) {
+        showMessage("No movies found.");
+        return;
+    }
 
     movies.forEach((movie) => {
         const { poster_path, title, vote_average, overview } = movie;
@@ -75,7 +99,7 @@ form.addEventListener("submit", (e) => {
     const searchTerm = search.value;
 
     if (searchTerm) {
-        getMovies(SEARCHAPI + searchTerm);
+        getMovies(SEARCHAPI + encodeURIComponent(searchTerm));
 
         search.value = "";
     }

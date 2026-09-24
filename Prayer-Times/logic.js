@@ -62,12 +62,58 @@
         };
     }
 
+    const DAY_SECONDS = 24 * 60 * 60;
+    const COUNTDOWN_PRAYERS = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"];
+
+    function toSeconds(time) {
+        const [hours, minutes] = time.split(":").map(Number);
+        return hours * 3600 + minutes * 60;
+    }
+
+    function secondsOfDay(date, timeZone) {
+        const options = { hour: "numeric", minute: "numeric", second: "numeric", hourCycle: "h23" };
+        if (timeZone) {
+            options.timeZone = timeZone;
+        }
+        const parts = {};
+        for (const part of new Intl.DateTimeFormat("en-GB", options).formatToParts(date)) {
+            parts[part.type] = Number(part.value);
+        }
+        return (parts.hour % 24) * 3600 + parts.minute * 60 + parts.second;
+    }
+
+    function findNextPrayer(timings, nowSeconds) {
+        for (const name of COUNTDOWN_PRAYERS) {
+            const at = toSeconds(timings[name]);
+            if (at > nowSeconds) {
+                return { name, secondsLeft: at - nowSeconds, tomorrow: false };
+            }
+        }
+        return {
+            name: "Fajr",
+            secondsLeft: DAY_SECONDS - nowSeconds + toSeconds(timings.Fajr),
+            tomorrow: true
+        };
+    }
+
+    function formatCountdown(totalSeconds) {
+        const safe = Math.max(0, Math.floor(totalSeconds));
+        const hours = Math.floor(safe / 3600);
+        const minutes = Math.floor((safe % 3600) / 60);
+        const seconds = safe % 60;
+        return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+    }
+
     return {
         API_BASE,
         PRAYERS,
         formatApiDate,
         buildUrl,
         cleanTime,
-        parseResponse
+        parseResponse,
+        toSeconds,
+        secondsOfDay,
+        findNextPrayer,
+        formatCountdown
     };
 });

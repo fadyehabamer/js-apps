@@ -4,6 +4,10 @@
     padding: 0;
 }
 
+[hidden] {
+    display: none !important;
+}
+
 :root {
     --bg: #0f1e2b;
     --card: #162a3b;
@@ -111,4 +115,28 @@ button {
 .times .time {
     font-variant-numeric: tabular-nums;
     font-weight: 600;
+}
+
+.next {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 12px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    background-color: #0c1822;
+}
+
+.countdown {
+    font-size: 1.8rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--accent);
+}
+
+.times li.next {
+    background-color: rgba(242, 181, 68, 0.14);
+    border-radius: 8px;
+    color: var(--accent);
 }

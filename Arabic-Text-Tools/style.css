@@ -183,3 +183,49 @@ button.secondary:hover {
 .status.error {
     color: var(--error);
 }
+
+[lang="ar"],
+textarea {
+    font-family: "Noto Naskh Arabic", "Geeza Pro", "Segoe UI", Tahoma, sans-serif;
+}
+
+textarea::placeholder {
+    color: #9a9184;
+}
+
+:focus-visible {
+    outline: 3px solid #d98c1f;
+    outline-offset: 2px;
+}
+
+textarea:focus-visible {
+    outline-offset: 0;
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 20px 12px 32px;
+    }
+
+    .page-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .card {
+        padding: 14px;
+    }
+
+    .tools,
+    .actions {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    .options {
+        flex-direction: column;
+    }
+
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

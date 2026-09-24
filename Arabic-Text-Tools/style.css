@@ -106,3 +106,26 @@ button:hover {
     clip: rect(0 0 0 0);
     white-space: nowrap;
 }
+
+.options {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-top: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+}
+
+.options legend {
+    font-weight: 600;
+    padding: 0 4px;
+}
+
+.check {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 400;
+    margin: 0;
+}

@@ -24,7 +24,17 @@
 
         <section class="card" aria-labelledby="tools-title">
             <h2 id="tools-title">Tools</h2>
-            <div class="tools" id="tools"></div>
+            <div class="tools">
+                <button type="button" data-tool="tashkeel">Remove tashkeel</button>
+                <button type="button" data-tool="normalize">Normalise letters</button>
+            </div>
+            <fieldset class="options">
+                <legend>Normalise</legend>
+                <label class="check"><input type="checkbox" id="opt-alef" checked> <span lang="ar">أ إ آ ٱ</span> → <span lang="ar">ا</span></label>
+                <label class="check"><input type="checkbox" id="opt-ya" checked> <span lang="ar">ى</span> → <span lang="ar">ي</span></label>
+                <label class="check"><input type="checkbox" id="opt-ta" checked> <span lang="ar">ة</span> → <span lang="ar">ه</span></label>
+                <label class="check"><input type="checkbox" id="opt-tatweel" checked> Remove tatweel (<span lang="ar">ـ</span>)</label>
+            </fieldset>
         </section>
 
         <section class="card" aria-labelledby="output-title">
@@ -33,6 +43,9 @@
             <textarea id="output-text" rows="7" lang="ar" dir="rtl" readonly></textarea>
         </section>
     </main>
+
+    <script src="logic.js"></script>
+    <script src="app.js"></script>
 </body>
 
 </html>

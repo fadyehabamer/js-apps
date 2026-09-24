@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Work out zakat on cash, gold, silver and trade goods, with the nisab taken from today's gold price.">
+    <title>Zakat Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main class="container">
+        <header class="page-header">
+            <h1>Zakat Calculator</h1>
+            <p class="subtitle">Zakat is 2.5% of zakatable wealth held for a lunar year, once it reaches the nisab (the value of 85 g of gold).</p>
+        </header>
+
+        <form id="zakat-form" class="card">
+            <fieldset>
+                <legend>Gold price</legend>
+                <div class="field">
+                    <label for="gold-price">Price of 1 g of 24k gold</label>
+                    <input type="text" id="gold-price" name="gold-price" inputmode="decimal" autocomplete="off">
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>What you own</legend>
+                <div class="grid">
+                    <div class="field">
+                        <label for="cash">Cash and bank balances</label>
+                        <input type="text" id="cash" name="cash" inputmode="decimal" autocomplete="off">
+                    </div>
+                    <div class="field">
+                        <label for="gold-grams">Gold (grams)</label>
+                        <input type="text" id="gold-grams" name="gold-grams" inputmode="decimal" autocomplete="off">
+                    </div>
+                    <div class="field">
+                        <label for="silver-grams">Silver (grams)</label>
+                        <input type="text" id="silver-grams" name="silver-grams" inputmode="decimal" autocomplete="off">
+                    </div>
+                    <div class="field">
+                        <label for="silver-price">Price of 1 g of silver</label>
+                        <input type="text" id="silver-price" name="silver-price" inputmode="decimal" autocomplete="off">
+                    </div>
+                    <div class="field">
+                        <label for="trade-goods">Trade goods (stock for sale)</label>
+                        <input type="text" id="trade-goods" name="trade-goods" inputmode="decimal" autocomplete="off">
+                    </div>
+                </div>
+            </fieldset>
+
+            <button type="submit">Calculate</button>
+        </form>
+
+        <section class="card result" id="result" aria-labelledby="result-title" aria-live="polite">
+            <h2 id="result-title">Result</h2>
+            <p id="summary">Fill in the gold price and what you own, then press Calculate.</p>
+        </section>
+    </main>
+</body>
+
+</html>

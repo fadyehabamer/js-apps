@@ -34,6 +34,26 @@
             </form>
             <div class="result" id="g2h-result" aria-live="polite"></div>
         </section>
+
+        <section class="card" aria-labelledby="h2g-title">
+            <h2 id="h2g-title">Hijri to Gregorian</h2>
+            <form id="h2g-form" class="converter">
+                <div class="field">
+                    <label for="h-day">Day</label>
+                    <input type="number" id="h-day" name="h-day" min="1" max="30" inputmode="numeric">
+                </div>
+                <div class="field">
+                    <label for="h-month">Month</label>
+                    <select id="h-month" name="h-month"></select>
+                </div>
+                <div class="field">
+                    <label for="h-year">Year (AH)</label>
+                    <input type="number" id="h-year" name="h-year" inputmode="numeric">
+                </div>
+                <button type="submit">Convert</button>
+            </form>
+            <div class="result" id="h2g-result" aria-live="polite"></div>
+        </section>
     </main>
 
     <script src="logic.js"></script>

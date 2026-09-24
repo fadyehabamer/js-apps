@@ -82,6 +82,37 @@
         return date.toISOString().slice(0, 10);
     }
 
+    const HIJRI_EPOCH = toUtcDate(622, 7, 19);
+    const DAY_MS = 24 * 60 * 60 * 1000;
+    const MEAN_YEAR_DAYS = 354.36667;
+    const MEAN_MONTH_DAYS = 29.530589;
+
+    function estimateGregorian(year, month, day) {
+        const days = (year - 1) * MEAN_YEAR_DAYS + (month - 1) * MEAN_MONTH_DAYS + (day - 1);
+        return new Date(HIJRI_EPOCH.getTime() + Math.round(days) * DAY_MS);
+    }
+
+    function hijriToGregorian(year, month, day) {
+        const guess = estimateGregorian(year, month, day);
+        for (let offset = -5; offset <= 5; offset++) {
+            const candidate = new Date(guess.getTime() + offset * DAY_MS);
+            const parts = toHijriParts(candidate);
+            if (parts.year === year && parts.month === month && parts.day === day) {
+                return candidate;
+            }
+        }
+        return null;
+    }
+
+    function hijriMonthNames(lang) {
+        const formatter = new Intl.DateTimeFormat(HIJRI_LOCALES[lang], { month: "long", timeZone: "UTC" });
+        const names = [];
+        for (let month = 1; month <= 12; month++) {
+            names.push(formatter.format(hijriToGregorian(1447, month, 1)));
+        }
+        return names;
+    }
+
     return {
         toUtcDate,
         todayUtc,
@@ -89,6 +120,8 @@
         formatHijri,
         formatGregorian,
         parseIsoDate,
-        toIsoDate
+        toIsoDate,
+        hijriToGregorian,
+        hijriMonthNames
     };
 });

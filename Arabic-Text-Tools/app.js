@@ -1,4 +1,4 @@
-const { removeTashkeel, normalizeArabic, textStats } = ArabicText;
+const { removeTashkeel, normalizeArabic, toWesternDigits, toArabicDigits, textStats } = ArabicText;
 
 const input = document.getElementById("input-text");
 const output = document.getElementById("output-text");
@@ -28,7 +28,9 @@ const tools = {
         ya: optYa.checked,
         taMarbuta: optTa.checked,
         tatweel: optTatweel.checked
-    })
+    }),
+    western: (text) => toWesternDigits(text),
+    eastern: (text) => toArabicDigits(text)
 };
 
 document.querySelectorAll("[data-tool]").forEach((button) => {

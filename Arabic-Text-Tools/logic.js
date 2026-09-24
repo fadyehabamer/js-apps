@@ -79,7 +79,19 @@
         };
     }
 
+    function toWesternDigits(text) {
+        return text
+            .replace(/[\u0660-\u0669]/g, (digit) => String(digit.charCodeAt(0) - 0x0660))
+            .replace(/[\u06F0-\u06F9]/g, (digit) => String(digit.charCodeAt(0) - 0x06F0));
+    }
+
+    function toArabicDigits(text) {
+        return text.replace(/[0-9]/g, (digit) => String.fromCharCode(0x0660 + Number(digit)));
+    }
+
     return {
+        toWesternDigits,
+        toArabicDigits,
         countWords,
         countLetters,
         countArabicLetters,

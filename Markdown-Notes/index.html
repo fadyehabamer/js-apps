@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A small notes app that stores Markdown notes in your browser and shows a live preview.">
+    <title>Markdown Notes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app">
+        <header class="topbar">
+            <h1>Markdown Notes</h1>
+        </header>
+
+        <main class="workspace">
+            <section class="editor-pane" aria-labelledby="editor-title">
+                <h2 id="editor-title" class="pane-title">Write</h2>
+                <label for="editor" class="visually-hidden">Note text (Markdown)</label>
+                <textarea id="editor" spellcheck="true" placeholder="# Title&#10;&#10;Write something..."></textarea>
+            </section>
+
+            <section class="preview-pane" aria-labelledby="preview-title">
+                <h2 id="preview-title" class="pane-title">Preview</h2>
+                <article class="preview" id="preview"></article>
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>

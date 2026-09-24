@@ -24,7 +24,8 @@ notGate.js
 ```bash
 git clone https://github.com/fadyehabamer/js-apps.git
 cd js-apps/FrontEnd-Recruitment-Task
-# then open index.html in your browser
+# there is no web page: run a solution with Node
+node getTotalPrice.js
 ```
 
 **Topics:** `javascript`

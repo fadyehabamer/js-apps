@@ -56,7 +56,9 @@ function renderResult(result, currency) {
     const money = (value) => formatMoney(value, currency);
     breakdownBody.replaceChildren(...result.items.map((item) => row(item.label, money(item.value))));
     breakdownFoot.replaceChildren(
-        row("Total zakatable wealth", money(result.total), "total"),
+        row("Total assets", money(result.total), "total"),
+        row("Less debts due now", result.debts ? `-${money(result.debts)}` : money(0)),
+        row("Zakatable wealth", money(result.net), "total"),
         row(`Nisab (${NISAB_GOLD_GRAMS} g of gold)`, money(result.nisab)),
         row("Zakat due (2.5%)", money(result.zakat), "zakat")
     );

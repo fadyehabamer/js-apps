@@ -176,3 +176,8 @@ input[aria-invalid="true"] {
     border-color: var(--error);
     background-color: #fdf1f0;
 }
+
+.hint {
+    font-size: 0.85rem;
+    color: var(--muted);
+}

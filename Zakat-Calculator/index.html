@@ -63,6 +63,16 @@
                 </div>
             </fieldset>
 
+            <fieldset>
+                <legend>What you owe</legend>
+                <div class="field">
+                    <label for="debts">Debts due now</label>
+                    <input type="text" id="debts" name="debts" inputmode="decimal" autocomplete="off" data-field="debts" aria-describedby="debts-hint debts-error">
+                    <p class="hint" id="debts-hint">Only what you have to pay back this year, not a long-term mortgage.</p>
+                    <p class="field-error" id="debts-error"></p>
+                </div>
+            </fieldset>
+
             <button type="submit">Calculate</button>
         </form>
 

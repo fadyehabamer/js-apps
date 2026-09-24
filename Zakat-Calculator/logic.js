@@ -13,7 +13,7 @@
         return Math.round(value * 100) / 100;
     }
 
-    const FIELDS = ["goldPrice", "cash", "goldGrams", "silverGrams", "silverPrice", "tradeGoods"];
+    const FIELDS = ["goldPrice", "cash", "goldGrams", "silverGrams", "silverPrice", "tradeGoods", "debts"];
     const MAX_AMOUNT = 1e15;
 
     function parseAmount(raw) {
@@ -65,15 +65,19 @@
             { key: "trade", label: "Trade goods", value: roundMoney(values.tradeGoods) }
         ];
         const total = roundMoney(items.reduce((sum, item) => sum + item.value, 0));
+        const debts = roundMoney(Math.min(values.debts || 0, total));
+        const net = roundMoney(total - debts);
         const nisab = roundMoney(NISAB_GOLD_GRAMS * values.goldPrice);
-        const due = total > 0 && total >= nisab;
+        const due = net > 0 && net >= nisab;
         return {
             items,
             total,
+            debts,
+            net,
             nisab,
             due,
-            zakat: due ? roundMoney(total * ZAKAT_RATE) : 0,
-            shortBy: due ? 0 : roundMoney(nisab - total)
+            zakat: due ? roundMoney(net * ZAKAT_RATE) : 0,
+            shortBy: due ? 0 : roundMoney(nisab - net)
         };
     }
 

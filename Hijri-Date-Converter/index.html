@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Convert dates between the Gregorian and Hijri (Umm al-Qura) calendars, with Arabic and English output.">
+    <title>Hijri Date Converter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main class="container">
+        <header class="page-header">
+            <h1>Hijri Date Converter</h1>
+            <p class="subtitle">Gregorian and Hijri dates using the Umm al-Qura calendar.</p>
+        </header>
+
+        <section class="card today" aria-labelledby="today-title">
+            <h2 id="today-title">Today</h2>
+            <p class="date-en" id="today-gregorian"></p>
+            <p class="date-en" id="today-hijri-en"></p>
+            <p class="date-ar" id="today-hijri-ar" lang="ar" dir="rtl"></p>
+        </section>
+
+        <section class="card" aria-labelledby="g2h-title">
+            <h2 id="g2h-title">Gregorian to Hijri</h2>
+            <form id="g2h-form" class="converter">
+                <div class="field">
+                    <label for="g-date">Gregorian date</label>
+                    <input type="date" id="g-date" name="g-date">
+                </div>
+                <button type="submit">Convert</button>
+            </form>
+            <div class="result" id="g2h-result" aria-live="polite"></div>
+        </section>
+    </main>
+</body>
+
+</html>

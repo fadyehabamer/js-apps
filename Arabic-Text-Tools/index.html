@@ -50,6 +50,12 @@
             <h2 id="output-title">Result</h2>
             <label for="output-text" class="visually-hidden">Result text</label>
             <textarea id="output-text" rows="7" lang="ar" dir="rtl" readonly></textarea>
+            <div class="actions">
+                <button type="button" id="copy-btn">Copy result</button>
+                <button type="button" id="reuse-btn" class="secondary">Use result as input</button>
+                <button type="button" id="clear-btn" class="secondary">Clear</button>
+            </div>
+            <p class="status" id="status" role="status" aria-live="polite"></p>
         </section>
     </main>
 

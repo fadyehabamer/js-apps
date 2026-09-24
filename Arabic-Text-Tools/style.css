@@ -153,3 +153,33 @@ button:hover {
     font-weight: 700;
     font-variant-numeric: tabular-nums;
 }
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+button.secondary {
+    background-color: transparent;
+    color: var(--accent);
+}
+
+button.secondary:hover {
+    background-color: #f6ece4;
+}
+
+.status {
+    min-height: 1.5em;
+    margin-top: 10px;
+    font-weight: 600;
+}
+
+.status.ok {
+    color: var(--ok);
+}
+
+.status.error {
+    color: var(--error);
+}

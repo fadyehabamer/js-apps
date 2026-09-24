@@ -140,3 +140,65 @@ button {
     border-radius: 8px;
     color: var(--accent);
 }
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+.page-header {
+    position: relative;
+}
+
+.lang-switch {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+.lang-switch .lang-btn {
+    width: auto;
+    padding: 4px 12px;
+    background-color: transparent;
+    border-color: var(--border);
+    color: var(--muted);
+    font-weight: 600;
+}
+
+.lang-switch .lang-btn[aria-pressed="true"] {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: var(--accent-ink);
+}
+
+[dir="rtl"] body,
+[lang="ar"] {
+    font-family: "Noto Naskh Arabic", "Geeza Pro", "Segoe UI", Tahoma, sans-serif;
+}
+
+:focus-visible {
+    outline: 3px solid #7fd1ff;
+    outline-offset: 2px;
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 20px 12px 32px;
+    }
+
+    .page-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .card {
+        padding: 16px;
+    }
+
+    .countdown {
+        font-size: 1.5rem;
+    }
+}

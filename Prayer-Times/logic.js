@@ -104,6 +104,67 @@
         return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
     }
 
+    const STRINGS = {
+        en: {
+            title: "Prayer Times",
+            subtitle: "Today's prayer times for a city, from the Aladhan API.",
+            city: "City",
+            country: "Country",
+            method: "Calculation method",
+            submit: "Get times",
+            results: "Times",
+            language: "Language",
+            loading: "Loading...",
+            loadFailed: "Could not load prayer times.",
+            next: "Next: {name} in",
+            nextTomorrow: "Next: {name} (tomorrow) in",
+            method5: "Egyptian General Authority of Survey",
+            method4: "Umm al-Qura, Makkah",
+            method8: "Gulf Region",
+            method3: "Muslim World League",
+            method2: "ISNA (North America)",
+            method1: "University of Islamic Sciences, Karachi",
+            Fajr: "Fajr",
+            Sunrise: "Sunrise",
+            Dhuhr: "Dhuhr",
+            Asr: "Asr",
+            Maghrib: "Maghrib",
+            Isha: "Isha"
+        },
+        ar: {
+            title: "مواقيت الصلاة",
+            subtitle: "مواقيت الصلاة لليوم في أي مدينة، من خدمة Aladhan.",
+            city: "المدينة",
+            country: "الدولة",
+            method: "طريقة الحساب",
+            submit: "عرض المواقيت",
+            results: "المواقيت",
+            language: "اللغة",
+            loading: "جارٍ التحميل...",
+            loadFailed: "تعذّر تحميل مواقيت الصلاة.",
+            next: "الصلاة القادمة: {name} بعد",
+            nextTomorrow: "الصلاة القادمة: {name} (غدًا) بعد",
+            method5: "الهيئة المصرية العامة للمساحة",
+            method4: "أم القرى، مكة المكرمة",
+            method8: "منطقة الخليج",
+            method3: "رابطة العالم الإسلامي",
+            method2: "الجمعية الإسلامية لأمريكا الشمالية",
+            method1: "جامعة العلوم الإسلامية، كراتشي",
+            Fajr: "الفجر",
+            Sunrise: "الشروق",
+            Dhuhr: "الظهر",
+            Asr: "العصر",
+            Maghrib: "المغرب",
+            Isha: "العشاء"
+        }
+    };
+
+    function translate(lang, key, vars) {
+        const table = STRINGS[lang] || STRINGS.en;
+        const text = key in table ? table[key] : STRINGS.en[key] || key;
+        return text.replace(/\{(\w+)\}/g, (match, name) => (vars && name in vars ? vars[name] : match));
+    }
+
     return {
         API_BASE,
         PRAYERS,
@@ -114,6 +175,8 @@
         toSeconds,
         secondsOfDay,
         findNextPrayer,
-        formatCountdown
+        formatCountdown,
+        STRINGS,
+        translate
     };
 });

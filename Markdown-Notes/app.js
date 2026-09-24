@@ -1,4 +1,16 @@
-const { renderMarkdown, createNote, noteTitle, sortNotes, updateNote, deleteNote } = NotesLogic;
+const {
+    renderMarkdown,
+    createNote,
+    noteTitle,
+    sortNotes,
+    updateNote,
+    deleteNote,
+    parseStoredNotes,
+    serializeNotes
+} = NotesLogic;
+
+const STORAGE_KEY = "markdown-notes:notes";
+const ACTIVE_KEY = "markdown-notes:active";
 
 const editor = document.getElementById("editor");
 const preview = document.getElementById("preview");
@@ -8,9 +20,43 @@ const newButton = document.getElementById("new-note");
 const deleteButton = document.getElementById("delete-note");
 const workspace = document.getElementById("workspace");
 const noSelection = document.getElementById("no-selection");
+const saveState = document.getElementById("save-state");
 
 let notes = [];
 let activeId = null;
+
+function loadNotes() {
+    try {
+        notes = parseStoredNotes(localStorage.getItem(STORAGE_KEY));
+        const savedActive = localStorage.getItem(ACTIVE_KEY);
+        activeId = notes.some((note) => note.id === savedActive) ? savedActive : null;
+    } catch (error) {
+        notes = [];
+        setSaveState("Storage is blocked in this browser, so notes won't be kept after you close the page.", true);
+    }
+    if (!activeId && notes.length) {
+        activeId = sortNotes(notes)[0].id;
+    }
+}
+
+function saveNotes() {
+    try {
+        localStorage.setItem(STORAGE_KEY, serializeNotes(notes));
+        if (activeId) {
+            localStorage.setItem(ACTIVE_KEY, activeId);
+        } else {
+            localStorage.removeItem(ACTIVE_KEY);
+        }
+        setSaveState("Saved", false);
+    } catch (error) {
+        setSaveState("Couldn't save. Browser storage may be full or blocked.", true);
+    }
+}
+
+function setSaveState(message, isError) {
+    saveState.textContent = message;
+    saveState.classList.toggle("error", isError);
+}
 
 function makeId() {
     if (window.crypto && typeof window.crypto.randomUUID === "function") {
@@ -71,6 +117,7 @@ function selectNote(id) {
     activeId = id;
     renderList();
     renderEditor();
+    saveNotes();
 }
 
 newButton.addEventListener("click", () => {
@@ -94,6 +141,7 @@ editor.addEventListener("input", () => {
     notes = updateNote(notes, activeId, editor.value, new Date());
     preview.innerHTML = renderMarkdown(editor.value);
     renderList();
+    saveNotes();
 });
 
 deleteButton.addEventListener("click", () => {
@@ -109,5 +157,6 @@ deleteButton.addEventListener("click", () => {
     selectNote(next ? next.id : null);
 });
 
+loadNotes();
 renderList();
 renderEditor();

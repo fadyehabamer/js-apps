@@ -261,3 +261,14 @@ button.danger:hover {
     padding: 0;
     background: none;
 }
+
+.save-state {
+    margin-inline-start: auto;
+    font-size: 0.8rem;
+    color: var(--muted);
+}
+
+.save-state.error {
+    color: var(--danger);
+    font-weight: 600;
+}

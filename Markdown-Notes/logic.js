@@ -160,7 +160,45 @@
         return notes.filter((note) => note.id !== id);
     }
 
+    function isValidNote(note) {
+        return Boolean(note) &&
+            typeof note.id === "string" && note.id !== "" &&
+            typeof note.body === "string" &&
+            typeof note.createdAt === "string" &&
+            typeof note.updatedAt === "string" &&
+            !Number.isNaN(Date.parse(note.updatedAt));
+    }
+
+    function parseStoredNotes(raw) {
+        if (!raw) {
+            return [];
+        }
+        let data;
+        try {
+            data = JSON.parse(raw);
+        } catch (error) {
+            return [];
+        }
+        if (!Array.isArray(data)) {
+            return [];
+        }
+        const seen = new Set();
+        return data.filter((note) => {
+            if (!isValidNote(note) || seen.has(note.id)) {
+                return false;
+            }
+            seen.add(note.id);
+            return true;
+        });
+    }
+
+    function serializeNotes(notes) {
+        return JSON.stringify(notes.map(({ id, body, createdAt, updatedAt }) => ({ id, body, createdAt, updatedAt })));
+    }
+
     return {
+        parseStoredNotes,
+        serializeNotes,
         createNote,
         noteTitle,
         sortNotes,

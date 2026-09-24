@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Clean up Arabic text: remove tashkeel, normalise alef, ya and ta marbuta, count words and letters, and convert digits.">
+    <title>Arabic Text Tools</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main class="container">
+        <header class="page-header">
+            <h1>Arabic Text Tools</h1>
+            <p class="subtitle">Paste Arabic text, pick a tool, copy the result.</p>
+        </header>
+
+        <section class="card" aria-labelledby="input-label-title">
+            <h2 id="input-label-title" class="visually-hidden">Input</h2>
+            <label for="input-text">Text</label>
+            <textarea id="input-text" rows="7" lang="ar" dir="rtl" spellcheck="false" placeholder="اكتب أو الصق النص هنا"></textarea>
+        </section>
+
+        <section class="card" aria-labelledby="tools-title">
+            <h2 id="tools-title">Tools</h2>
+            <div class="tools" id="tools"></div>
+        </section>
+
+        <section class="card" aria-labelledby="output-title">
+            <h2 id="output-title">Result</h2>
+            <label for="output-text" class="visually-hidden">Result text</label>
+            <textarea id="output-text" rows="7" lang="ar" dir="rtl" readonly></textarea>
+        </section>
+    </main>
+</body>
+
+</html>

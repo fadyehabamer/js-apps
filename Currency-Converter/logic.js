@@ -61,7 +61,29 @@
         }).format(value);
     }
 
+    function relativeTime(then, now, locale) {
+        const formatter = new Intl.RelativeTimeFormat(locale || "en", { numeric: "auto" });
+        const seconds = Math.round((then - now) / 1000);
+        const units = [
+            ["day", 86400],
+            ["hour", 3600],
+            ["minute", 60]
+        ];
+        for (const [unit, size] of units) {
+            if (Math.abs(seconds) >= size) {
+                return formatter.format(Math.round(seconds / size), unit);
+            }
+        }
+        return formatter.format(0, "minute");
+    }
+
+    function formatTimestamp(ms, locale) {
+        return new Intl.DateTimeFormat(locale || "en-GB", { dateStyle: "medium", timeStyle: "short" }).format(new Date(ms));
+    }
+
     return {
+        relativeTime,
+        formatTimestamp,
         RATES_URL,
         CURRENCIES,
         CODES,

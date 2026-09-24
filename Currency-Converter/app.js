@@ -1,4 +1,15 @@
-const { RATES_URL, CURRENCIES, CODES, parseRates, rateBetween, convert, formatMoney, formatRate } = CurrencyLogic;
+const {
+    RATES_URL,
+    CURRENCIES,
+    CODES,
+    parseRates,
+    rateBetween,
+    convert,
+    formatMoney,
+    formatRate,
+    relativeTime,
+    formatTimestamp
+} = CurrencyLogic;
 
 const form = document.getElementById("converter");
 const amountInput = document.getElementById("amount");
@@ -8,6 +19,8 @@ const converted = document.getElementById("converted");
 const rateLine = document.getElementById("rate");
 const swapButton = document.getElementById("swap");
 const othersList = document.getElementById("others");
+const updatedLine = document.getElementById("updated");
+const refreshButton = document.getElementById("refresh");
 
 let data = null;
 
@@ -34,6 +47,18 @@ function render() {
     converted.textContent = `${formatMoney(amount, from)} = ${formatMoney(convert(amount, from, to, data.rates), to)}`;
     rateLine.textContent = `1 ${from} = ${formatRate(rateBetween(from, to, data.rates))} ${to}`;
     renderOthers(amount, from, to);
+    renderUpdated();
+}
+
+function renderUpdated() {
+    if (!data || !data.updatedAt) {
+        updatedLine.textContent = "";
+        return;
+    }
+    const time = document.createElement("time");
+    time.dateTime = new Date(data.updatedAt).toISOString();
+    time.textContent = formatTimestamp(data.updatedAt);
+    updatedLine.replaceChildren("Rates updated ", time, ` (${relativeTime(data.updatedAt, Date.now())})`);
 }
 
 function renderOthers(amount, from, to) {
@@ -53,10 +78,15 @@ function renderOthers(amount, from, to) {
 }
 
 async function loadRates() {
-    converted.textContent = "Loading rates...";
-    const response = await fetch(RATES_URL);
-    data = parseRates(await response.json());
-    render();
+    converted.textContent = data ? converted.textContent : "Loading rates...";
+    refreshButton.disabled = true;
+    try {
+        const response = await fetch(RATES_URL);
+        data = parseRates(await response.json());
+        render();
+    } finally {
+        refreshButton.disabled = false;
+    }
 }
 
 form.addEventListener("input", render);
@@ -69,5 +99,8 @@ swapButton.addEventListener("click", () => {
 });
 form.addEventListener("submit", (event) => event.preventDefault());
 
+refreshButton.addEventListener("click", loadRates);
+
 fillSelects();
 loadRates();
+setInterval(renderUpdated, 60000);

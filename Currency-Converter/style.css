@@ -160,3 +160,31 @@ button {
 .others strong {
     font-variant-numeric: tabular-nums;
 }
+
+.meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px 12px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    font-size: 0.9rem;
+    color: var(--muted);
+}
+
+.link-btn {
+    padding: 4px 8px;
+    border: none;
+    background: none;
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.link-btn:disabled {
+    color: var(--muted);
+    cursor: wait;
+}

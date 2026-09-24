@@ -129,3 +129,27 @@ button:hover {
     font-weight: 400;
     margin: 0;
 }
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.stats div {
+    background-color: #f6f2ea;
+    border-radius: 8px;
+    padding: 8px 10px;
+}
+
+.stats dt {
+    font-size: 0.8rem;
+    color: var(--muted);
+}
+
+.stats dd {
+    font-size: 1.3rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}

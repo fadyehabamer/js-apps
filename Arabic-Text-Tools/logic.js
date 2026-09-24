@@ -50,7 +50,41 @@
         return result;
     }
 
+    function countWords(text) {
+        return text.split(/\s+/).filter((word) => /[\p{L}\p{N}]/u.test(word)).length;
+    }
+
+    function countLetters(text) {
+        const letters = text.replace(TATWEEL, "").match(/\p{L}/gu);
+        return letters ? letters.length : 0;
+    }
+
+    function countArabicLetters(text) {
+        const letters = text.replace(TATWEEL, "").match(/(?=\p{Script=Arabic})\p{L}/gu);
+        return letters ? letters.length : 0;
+    }
+
+    function countTashkeel(text) {
+        const marks = text.match(TASHKEEL);
+        return marks ? marks.length : 0;
+    }
+
+    function textStats(text) {
+        return {
+            characters: Array.from(text).length,
+            words: countWords(text),
+            letters: countLetters(text),
+            arabicLetters: countArabicLetters(text),
+            tashkeel: countTashkeel(text)
+        };
+    }
+
     return {
+        countWords,
+        countLetters,
+        countArabicLetters,
+        countTashkeel,
+        textStats,
         removeTashkeel,
         removeTatweel,
         normalizeAlef,

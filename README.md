@@ -2,10 +2,11 @@
 
 > Vanilla-JS apps with UI — tools, generators, utilities
 
-**10 demos** · 🔗 **[Live gallery](https://fadyehabamer.github.io/js-apps/)** — every demo is deployed to GitHub Pages.
+**11 demos** · 🔗 **[Live gallery](https://fadyehabamer.github.io/js-apps/)** — every demo is deployed to GitHub Pages.
 
 | Demo | Description | Preview |
 |------|-------------|---------|
+| [`Arabic-Text-Tools`](./Arabic-Text-Tools/) | Remove tashkeel, normalise alef/ya/ta marbuta, count words and letters, and swap Arabic-Indic and Western digits | [🔗 Live](https://fadyehabamer.github.io/js-apps/Arabic-Text-Tools/) |
 | [`EndOfTheYear-Countdown`](./EndOfTheYear-Countdown/) | Live countdown (days, hours, minutes, seconds) to the next New Year | [🔗 Live](https://fadyehabamer.github.io/js-apps/EndOfTheYear-Countdown/) |
 | [`FireFox-ReBrand`](./FireFox-ReBrand/) | Firefox website rebrand concept with WOW.js animations and Tilt.js | [🔗 Live](https://fadyehabamer.github.io/js-apps/FireFox-ReBrand/) |
 | [`FrontEnd-Recruitment-Task`](./FrontEnd-Recruitment-Task/) | CAT Front End Circle recruitment task: small JS exercises (reverse string, NOT gate, total price), run with Node | — |

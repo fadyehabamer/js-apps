@@ -215,3 +215,41 @@ input[aria-invalid="true"] {
     background-color: #fdecea;
     color: var(--error);
 }
+
+:focus-visible {
+    outline: 3px solid #f59e0b;
+    outline-offset: 2px;
+}
+
+select {
+    width: 100%;
+    min-width: 0;
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 20px 12px 32px;
+    }
+
+    .page-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .card {
+        padding: 14px;
+    }
+
+    .pair {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .swap {
+        align-self: center;
+        transform: rotate(90deg);
+    }
+
+    .converted {
+        font-size: 1.4rem;
+    }
+}

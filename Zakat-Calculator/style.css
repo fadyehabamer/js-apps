@@ -165,3 +165,14 @@ tfoot .zakat td {
     background-color: #e3f1e8;
     border-bottom: none;
 }
+
+.field-error {
+    min-height: 1.2em;
+    font-size: 0.85rem;
+    color: var(--error);
+}
+
+input[aria-invalid="true"] {
+    border-color: var(--error);
+    background-color: #fdf1f0;
+}

@@ -1,4 +1,4 @@
-const { calculateZakat, formatMoney, CURRENCIES, NISAB_GOLD_GRAMS } = ZakatLogic;
+const { calculateZakat, validateInputs, formatMoney, CURRENCIES, NISAB_GOLD_GRAMS } = ZakatLogic;
 
 const form = document.getElementById("zakat-form");
 const summary = document.getElementById("summary");
@@ -6,6 +6,7 @@ const currencySelect = document.getElementById("currency");
 const breakdown = document.getElementById("breakdown");
 const breakdownBody = document.getElementById("breakdown-body");
 const breakdownFoot = document.getElementById("breakdown-foot");
+const inputs = Array.from(form.querySelectorAll("input[data-field]"));
 
 function fillCurrencies() {
     for (const code of CURRENCIES) {
@@ -16,9 +17,24 @@ function fillCurrencies() {
     }
 }
 
-function readNumber(id) {
-    const value = Number(document.getElementById(id).value);
-    return Number.isFinite(value) ? value : 0;
+function readForm() {
+    const raw = {};
+    for (const input of inputs) {
+        raw[input.dataset.field] = input.value;
+    }
+    return raw;
+}
+
+function showErrors(errors) {
+    for (const input of inputs) {
+        const message = errors[input.dataset.field] || "";
+        document.getElementById(`${input.id}-error`).textContent = message;
+        if (message) {
+            input.setAttribute("aria-invalid", "true");
+        } else {
+            input.removeAttribute("aria-invalid");
+        }
+    }
 }
 
 function row(label, value, className) {
@@ -54,15 +70,16 @@ function renderResult(result, currency) {
 
 form.addEventListener("submit", (event) => {
     event.preventDefault();
-    const result = calculateZakat({
-        goldPrice: readNumber("gold-price"),
-        cash: readNumber("cash"),
-        goldGrams: readNumber("gold-grams"),
-        silverGrams: readNumber("silver-grams"),
-        silverPrice: readNumber("silver-price"),
-        tradeGoods: readNumber("trade-goods")
-    });
-    renderResult(result, currencySelect.value);
+    const { values, errors, valid } = validateInputs(readForm());
+    showErrors(errors);
+    if (!valid) {
+        breakdown.hidden = true;
+        const count = Object.keys(errors).length;
+        summary.textContent = count === 1 ? "One field needs fixing before calculating." : `${count} fields need fixing before calculating.`;
+        inputs.find((input) => input.hasAttribute("aria-invalid")).focus();
+        return;
+    }
+    renderResult(calculateZakat(values), currencySelect.value);
 });
 
 fillCurrencies();

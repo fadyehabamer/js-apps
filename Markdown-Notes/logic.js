@@ -196,7 +196,19 @@
         return JSON.stringify(notes.map(({ id, body, createdAt, updatedAt }) => ({ id, body, createdAt, updatedAt })));
     }
 
+    function searchNotes(notes, query) {
+        const terms = String(query || "").toLocaleLowerCase().split(/\s+/).filter(Boolean);
+        if (!terms.length) {
+            return notes;
+        }
+        return notes.filter((note) => {
+            const haystack = note.body.toLocaleLowerCase();
+            return terms.every((term) => haystack.includes(term));
+        });
+    }
+
     return {
+        searchNotes,
         parseStoredNotes,
         serializeNotes,
         createNote,

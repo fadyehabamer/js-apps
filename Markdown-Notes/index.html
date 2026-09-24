@@ -18,8 +18,13 @@
         </header>
 
         <nav class="sidebar" aria-label="Notes">
+            <div class="search">
+                <label for="search" class="visually-hidden">Search notes</label>
+                <input type="search" id="search" placeholder="Search notes" autocomplete="off">
+            </div>
             <ul class="note-list" id="note-list"></ul>
             <p class="empty" id="list-empty" hidden>No notes yet.</p>
+            <p class="empty" id="no-matches" hidden>No notes match your search.</p>
         </nav>
 
         <div class="no-selection" id="no-selection" hidden>

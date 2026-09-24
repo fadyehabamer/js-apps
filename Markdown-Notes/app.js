@@ -6,7 +6,8 @@ const {
     updateNote,
     deleteNote,
     parseStoredNotes,
-    serializeNotes
+    serializeNotes,
+    searchNotes
 } = NotesLogic;
 
 const STORAGE_KEY = "markdown-notes:notes";
@@ -21,6 +22,8 @@ const deleteButton = document.getElementById("delete-note");
 const workspace = document.getElementById("workspace");
 const noSelection = document.getElementById("no-selection");
 const saveState = document.getElementById("save-state");
+const searchInput = document.getElementById("search");
+const noMatches = document.getElementById("no-matches");
 
 let notes = [];
 let activeId = null;
@@ -74,7 +77,7 @@ function formatUpdated(iso) {
 }
 
 function renderList() {
-    const sorted = sortNotes(notes);
+    const sorted = sortNotes(searchNotes(notes, searchInput.value));
     noteList.replaceChildren();
     for (const note of sorted) {
         const item = document.createElement("li");
@@ -96,6 +99,7 @@ function renderList() {
         noteList.appendChild(item);
     }
     listEmpty.hidden = notes.length > 0;
+    noMatches.hidden = notes.length === 0 || sorted.length > 0;
 }
 
 function renderEditor() {
@@ -120,7 +124,17 @@ function selectNote(id) {
     saveNotes();
 }
 
+searchInput.addEventListener("input", renderList);
+
+searchInput.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+        searchInput.value = "";
+        renderList();
+    }
+});
+
 newButton.addEventListener("click", () => {
+    searchInput.value = "";
     const note = createNote(makeId(), new Date());
     notes = [note, ...notes];
     selectNote(note.id);

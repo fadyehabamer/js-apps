@@ -272,3 +272,18 @@ button.danger:hover {
     color: var(--danger);
     font-weight: 600;
 }
+
+.search {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+}
+
+.search input {
+    width: 100%;
+    font: inherit;
+    padding: 7px 10px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background-color: var(--bg);
+    color: var(--ink);
+}

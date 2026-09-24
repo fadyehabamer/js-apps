@@ -2,7 +2,7 @@
 
 > Vanilla-JS apps with UI — tools, generators, utilities
 
-**11 demos** · 🔗 **[Live gallery](https://fadyehabamer.github.io/js-apps/)** — every demo is deployed to GitHub Pages.
+**12 demos** · 🔗 **[Live gallery](https://fadyehabamer.github.io/js-apps/)** — every demo is deployed to GitHub Pages.
 
 | Demo | Description | Preview |
 |------|-------------|---------|
@@ -16,6 +16,7 @@
 | [`MovieSearch`](./MovieSearch/) | Browse popular movies and search TMDB by title, with ratings and overviews | [🔗 Live](https://fadyehabamer.github.io/js-apps/MovieSearch/) |
 | [`Prayer-Times`](./Prayer-Times/) | Prayer times for a city from the Aladhan API, next-prayer countdown, Arabic/English, works offline from the last result | [🔗 Live](https://fadyehabamer.github.io/js-apps/Prayer-Times/) |
 | [`Todo-App`](./Todo-App/) | Todo app with add, complete and delete, plus task and completion counters | [🔗 Live](https://fadyehabamer.github.io/js-apps/Todo-App/) |
+| [`Zakat-Calculator`](./Zakat-Calculator/) | Zakat on cash, gold, silver and trade goods with the nisab from your gold price, debts deducted, full breakdown | [🔗 Live](https://fadyehabamer.github.io/js-apps/Zakat-Calculator/) |
 | [`foxir-personal-website`](./foxir-personal-website/) | Fokir: one-page personal portfolio template with filterable portfolio, testimonials and blog | [🔗 Live](https://fadyehabamer.github.io/js-apps/foxir-personal-website/) |
 
 ---

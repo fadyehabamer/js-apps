@@ -129,7 +129,43 @@
         return html.join("\n");
     }
 
+    function createNote(id, now) {
+        const time = now.toISOString();
+        return { id, body: "", createdAt: time, updatedAt: time };
+    }
+
+    function noteTitle(note) {
+        const firstLine = note.body.split("\n").find((line) => line.trim()) || "";
+        const title = firstLine
+            .replace(/^\s*#{1,6}\s+/, "")
+            .replace(/^\s*([-*+]|\d+[.)])\s+/, "")
+            .replace(/[*_`]/g, "")
+            .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
+            .trim();
+        if (!title) {
+            return "Untitled note";
+        }
+        return title.length > 60 ? `${title.slice(0, 57)}...` : title;
+    }
+
+    function sortNotes(notes) {
+        return [...notes].sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
+    }
+
+    function updateNote(notes, id, body, now) {
+        return notes.map((note) => (note.id === id ? { ...note, body, updatedAt: now.toISOString() } : note));
+    }
+
+    function deleteNote(notes, id) {
+        return notes.filter((note) => note.id !== id);
+    }
+
     return {
+        createNote,
+        noteTitle,
+        sortNotes,
+        updateNote,
+        deleteNote,
         escapeHtml,
         isSafeUrl,
         renderInline,

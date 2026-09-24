@@ -13,11 +13,24 @@
     <div class="app">
         <header class="topbar">
             <h1>Markdown Notes</h1>
+            <button type="button" id="new-note" class="primary">New note</button>
         </header>
 
-        <main class="workspace">
+        <nav class="sidebar" aria-label="Notes">
+            <ul class="note-list" id="note-list"></ul>
+            <p class="empty" id="list-empty" hidden>No notes yet.</p>
+        </nav>
+
+        <div class="no-selection" id="no-selection" hidden>
+            <p>Pick a note on the left or create a new one.</p>
+        </div>
+
+        <main class="workspace" id="workspace">
             <section class="editor-pane" aria-labelledby="editor-title">
-                <h2 id="editor-title" class="pane-title">Write</h2>
+                <div class="pane-head">
+                    <h2 id="editor-title" class="pane-title">Write</h2>
+                    <button type="button" id="delete-note" class="danger">Delete</button>
+                </div>
                 <label for="editor" class="visually-hidden">Note text (Markdown)</label>
                 <textarea id="editor" spellcheck="true" placeholder="# Title&#10;&#10;Write something..."></textarea>
             </section>

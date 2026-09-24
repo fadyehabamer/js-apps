@@ -123,6 +123,7 @@
             network: "Couldn't reach the prayer times service. Try again in a moment.",
             timeout: "The request took too long. Try again.",
             service: "The prayer times service returned an error. Try again later.",
+            cached: "Showing saved times from {date}.",
             next: "Next: {name} in",
             nextTomorrow: "Next: {name} (tomorrow) in",
             method5: "Egyptian General Authority of Survey",
@@ -156,6 +157,7 @@
             network: "تعذّر الوصول إلى خدمة المواقيت. حاول مرة أخرى بعد قليل.",
             timeout: "استغرق الطلب وقتًا طويلًا. حاول مرة أخرى.",
             service: "حدث خطأ في خدمة المواقيت. حاول لاحقًا.",
+            cached: "تُعرض المواقيت المحفوظة بتاريخ {date}.",
             next: "الصلاة القادمة: {name} بعد",
             nextTomorrow: "الصلاة القادمة: {name} (غدًا) بعد",
             method5: "الهيئة المصرية العامة للمساحة",
@@ -200,6 +202,37 @@
         return "service";
     }
 
+    function serializeCache(query, result, savedAt) {
+        return JSON.stringify({ query, result, savedAt: savedAt.toISOString() });
+    }
+
+    function readCache(raw) {
+        if (!raw) {
+            return null;
+        }
+        let data;
+        try {
+            data = JSON.parse(raw);
+        } catch (error) {
+            return null;
+        }
+        if (!data || !data.query || !data.result || !data.result.timings) {
+            return null;
+        }
+        if (!PRAYERS.every((name) => cleanTime(data.result.timings[name]))) {
+            return null;
+        }
+        const savedAt = new Date(data.savedAt);
+        if (Number.isNaN(savedAt.getTime())) {
+            return null;
+        }
+        return { query: data.query, result: data.result, savedAt };
+    }
+
+    function isSameDay(a, b) {
+        return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+    }
+
     function translate(lang, key, vars) {
         const table = STRINGS[lang] || STRINGS.en;
         const text = key in table ? table[key] : STRINGS.en[key] || key;
@@ -220,6 +253,9 @@
         STRINGS,
         translate,
         validateQuery,
-        classifyError
+        classifyError,
+        serializeCache,
+        readCache,
+        isSameDay
     };
 });

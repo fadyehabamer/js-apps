@@ -222,3 +222,12 @@ button:disabled {
     opacity: 0.6;
     cursor: wait;
 }
+
+.cache-note {
+    margin-top: 8px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background-color: rgba(127, 209, 255, 0.12);
+    color: #bfe6ff;
+    font-size: 0.9rem;
+}

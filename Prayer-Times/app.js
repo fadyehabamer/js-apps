@@ -7,10 +7,15 @@ const {
     formatCountdown,
     translate,
     validateQuery,
-    classifyError
+    classifyError,
+    serializeCache,
+    readCache,
+    isSameDay
 } = PrayerLogic;
 
 const REQUEST_TIMEOUT_MS = 10000;
+const CACHE_KEY = "prayer-times:last";
+const LANG_KEY = "prayer-times:lang";
 
 const form = document.getElementById("city-form");
 const cityInput = document.getElementById("city");
@@ -25,6 +30,7 @@ const langButtons = document.querySelectorAll(".lang-btn");
 const statusLine = document.getElementById("status");
 const resultsSection = document.getElementById("results");
 const submitButton = document.getElementById("submit-btn");
+const cacheNote = document.getElementById("cache-note");
 
 let lang = "en";
 let current = null;
@@ -32,6 +38,24 @@ let currentQuery = null;
 let timer = null;
 let statusKey = "";
 let statusIsError = false;
+let cachedAt = null;
+
+function storageGet(key) {
+    try {
+        return localStorage.getItem(key);
+    } catch (error) {
+        return null;
+    }
+}
+
+function storageSet(key, value) {
+    try {
+        localStorage.setItem(key, value);
+    } catch (error) {
+        return false;
+    }
+    return true;
+}
 
 function t(key, vars) {
     return translate(lang, key, vars);
@@ -58,6 +82,7 @@ function applyLanguage() {
         renderTimes(current, currentQuery);
     }
     setStatus(statusKey, statusIsError);
+    updateCacheNote();
 }
 
 function describeDate(result) {
@@ -129,6 +154,29 @@ async function fetchJson(url) {
     }
 }
 
+function formatSavedDate(date) {
+    return new Intl.DateTimeFormat(lang === "ar" ? "ar-EG" : "en-GB", { dateStyle: "medium" }).format(date);
+}
+
+function updateCacheNote() {
+    cacheNote.hidden = !cachedAt;
+    cacheNote.textContent = cachedAt ? t("cached", { date: formatSavedDate(cachedAt) }) : "";
+}
+
+function restoreCache() {
+    const cache = readCache(storageGet(CACHE_KEY));
+    if (!cache) {
+        return null;
+    }
+    cityInput.value = cache.query.city;
+    countryInput.value = cache.query.country;
+    methodSelect.value = cache.query.method;
+    cachedAt = isSameDay(cache.savedAt, new Date()) ? null : cache.savedAt;
+    renderTimes(cache.result, cache.query);
+    updateCacheNote();
+    return cache;
+}
+
 async function loadTimes(query) {
     if (navigator.onLine === false) {
         setStatus("offline", true);
@@ -138,8 +186,12 @@ async function loadTimes(query) {
     submitButton.disabled = true;
     try {
         const json = await fetchJson(buildUrl({ ...query, date: new Date() }));
-        renderTimes(parseResponse(json), query);
+        const result = parseResponse(json);
+        cachedAt = null;
+        renderTimes(result, query);
+        updateCacheNote();
         setStatus("", false);
+        storageSet(CACHE_KEY, serializeCache(query, result, new Date()));
     } catch (error) {
         setStatus(classifyError(error, navigator.onLine), true);
     } finally {
@@ -176,13 +228,37 @@ form.addEventListener("submit", (event) => {
 window.addEventListener("offline", () => setStatus("offline", true));
 window.addEventListener("online", () => {
     if (statusKey === "offline") {
-        setStatus("", false);
+        if (cachedAt) {
+            loadTimes(currentQuery);
+        } else {
+            setStatus("", false);
+        }
     }
 });
 
 for (const button of langButtons) {
     button.addEventListener("click", () => {
         lang = button.dataset.lang;
+        storageSet(LANG_KEY, lang);
         applyLanguage();
     });
 }
+
+function start() {
+    const savedLang = storageGet(LANG_KEY);
+    if (savedLang === "ar" || savedLang === "en") {
+        lang = savedLang;
+    }
+    applyLanguage();
+    const cache = restoreCache();
+    if (!cache || !cachedAt) {
+        return;
+    }
+    if (navigator.onLine === false) {
+        setStatus("offline", true);
+    } else {
+        loadTimes(cache.query);
+    }
+}
+
+start();

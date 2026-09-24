@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/x-icon" href="images/target.svg">
+    <meta name="description" content="Fokir: a one-page personal portfolio template with about, services, filterable portfolio, testimonials, blog and contact sections.">
     <title> Fokir - Personal Portfolio </title>
 
     <!-- google font  -->
@@ -35,7 +36,7 @@
 
 
     <!-- start header that include navbar and cover with overlay -->
-    <div class="header">
+    <div class="header" id="home">
         <div class="container">
 
             <!-- start overlay -->
@@ -55,25 +56,25 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="#home">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">About</a>
+                            <a class="nav-link" href="#about">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Services</a>
+                            <a class="nav-link" href="#services">Services</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Portfolio</a>
+                            <a class="nav-link" href="#portfolio">Portfolio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Testimonial</a>
+                            <a class="nav-link" href="#testimonial">Testimonial</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Blog</a>
+                            <a class="nav-link" href="#blog">Blog</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Contact</a>
+                            <a class="nav-link" href="#contact">Contact</a>
                         </li>
                     </ul>
                 </div>
@@ -97,14 +98,14 @@
 
 
     <!-- start section about that include div image & div text -->
-    <div class="about">
+    <div class="about" id="about">
         <div class="container">
             <div class="row intro">
                 <!-- start image -->
                 <div class="image wow fadeInLeft col-sm-12 col-md-12 col-lg-6">
                     <div class="empty"> </div>
                     <div class="img">
-                        <img src="images/symbol.png">
+                        <img src="images/symbol.png" alt="Love will tear us apart typographic artwork">
                         <div class="overlay">
                             <div class="icons">
                                 <a href="#"> <i class="fab fa-facebook"></i> </a>
@@ -167,7 +168,7 @@
 
 
     <!-- start services -->
-    <div class="services">
+    <div class="services" id="services">
         <div class="container">
             <h2> Our Srevices </h2>
             <span class="line-1"> </span>
@@ -208,7 +209,7 @@
 
 
     <!--  start portfolio  -->
-    <div class="portfolio">
+    <div class="portfolio" id="portfolio">
         <div class="container">
             <h2> Our Portfolio </h2>
             <span class="line-1"> </span>
@@ -312,7 +313,7 @@
 
 
     <!-- start testimonial -->
-    <div class="testimonial">
+    <div class="testimonial" id="testimonial">
         <div class="container">
             <h2> Client's Feedback </h2>
             <span class="line-1"> </span>
@@ -329,7 +330,7 @@
 
                             <div class="carousel-item active">
                                 <div class="avatar">
-                                    <img src="images/male.png">
+                                    <img src="images/male.png" alt="Client photo">
                                 </div>
                                 <div class="person">
                                     <div class="text">
@@ -346,7 +347,7 @@
 
                             <div class="carousel-item">
                                 <div class="avatar">
-                                    <img src="images/female.png">
+                                    <img src="images/female.png" alt="Client photo">
                                 </div>
                                 <div class="person">
                                     <div class="text">
@@ -374,7 +375,7 @@
 
 
     <!-- start blog -->
-    <div class="blog">
+    <div class="blog" id="blog">
         <div class="container">
             <h2> Our Blog </h2>
             <span class="line-1"> </span>
@@ -385,7 +386,7 @@
                     <!-- card 1 -->
                     <div class="col-sm-12 col-md-6 col-lg-4">
                         <div class="card wow bounceIn ">
-                            <a href="#"> <img src="images/girl.jpg"> </a>
+                            <a href="#"> <img src="images/girl.jpg" alt="Web Design Blog Post"> </a>
                             <span> 23 November, 2015 </span>
                             <h3> <a href="#"> Web Design Blog Post</a></h3>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur
@@ -413,7 +414,7 @@
                     <!-- card 3 -->
                     <div class="col-sm-12 col-md-6 col-lg-4">
                         <div class="card wow bounceIn">
-                            <a href="#"> <img src="images/boy.jpg"> </a>
+                            <a href="#"> <img src="images/boy.jpg" alt="Web Design Blog Post"> </a>
                             <span> 23 November, 2015 </span>
                             <h3> <a href="#"> Web Design Blog Post</a></h3>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur
@@ -429,7 +430,7 @@
 
 
     <!-- start contact form -->
-    <section class="contact">
+    <section class="contact" id="contact">
 
         <div class="container text-center">
             <h2>Contact us</h2>

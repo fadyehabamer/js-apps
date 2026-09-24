@@ -12,48 +12,74 @@ const search = document.getElementById("search");
 getMovies(APIURL);
 
 async function getMovies(url) {
-    const resp = await fetch(url);
-    const respData = await resp.json();
+    try {
+        const resp = await fetch(url);
 
-    console.log(respData);
+        if (!resp.ok) {
+            throw new Error(`TMDB request failed (${resp.status})`);
+        }
 
-    showMovies(respData.results);
+        const respData = await resp.json();
+
+        showMovies(respData.results || []);
+    } catch (error) {
+        console.error(error);
+        showMessage("Could not load movies right now, please try again later.");
+    }
+}
+
+// replace the movie grid with a single text message
+function showMessage(text) {
+    main.innerHTML = "";
+
+    const msg = document.createElement("h2");
+    msg.classList.add("message");
+    msg.textContent = text;
+
+    main.appendChild(msg);
 }
 
 function showMovies(movies) {
     // clear main
     main.innerHTML = "";
 
+    if (movies.length === 0) {
+        showMessage("No movies found.");
+        return;
+    }
+
     movies.forEach((movie) => {
         const { poster_path, title, vote_average, overview } = movie;
 
+        // build the card with DOM APIs so API text is never parsed as HTML
         const movieEl = document.createElement("div");
         movieEl.classList.add("movie");
 
-        movieEl.innerHTML = `
-            <img
-                src="${IMGPATH + poster_path}"
-                alt="${title}"
-            />
-            <div class="movie-info">
-                <h3>${title}</h3>
-                <span class="${getClassByRate(
-                    vote_average
-                )}">${vote_average}</span>
-            </div>
-            <div class="overview">
-                <h3>Overview:</h3>
-                ${overview}
-            </div>
-        `;
-        
-          arr = document.querySelectorAll("img")
-        for(let i = 0 ; i<arr.length; i++){
-            // console.log(arr[i].src);
-            if(arr[i].src.includes("null")){
-                arr[i].src='./notfound.png'
-            }
-        }
+        const img = document.createElement("img");
+        img.src = poster_path ? IMGPATH + poster_path : "./notfound.png";
+        img.alt = title;
+
+        const info = document.createElement("div");
+        info.classList.add("movie-info");
+
+        const heading = document.createElement("h3");
+        heading.textContent = title;
+
+        const rating = document.createElement("span");
+        rating.classList.add(getClassByRate(vote_average));
+        rating.textContent = vote_average;
+
+        info.append(heading, rating);
+
+        const overviewEl = document.createElement("div");
+        overviewEl.classList.add("overview");
+
+        const overviewTitle = document.createElement("h3");
+        overviewTitle.textContent = "Overview:";
+
+        overviewEl.append(overviewTitle, overview || "");
+
+        movieEl.append(img, info, overviewEl);
 
         main.appendChild(movieEl);
     });
@@ -75,7 +101,7 @@ form.addEventListener("submit", (e) => {
     const searchTerm = search.value;
 
     if (searchTerm) {
-        getMovies(SEARCHAPI + searchTerm);
+        getMovies(SEARCHAPI + encodeURIComponent(searchTerm));
 
         search.value = "";
     }

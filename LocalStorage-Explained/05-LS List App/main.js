@@ -28,6 +28,8 @@ savedTodos.map((item) => {
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
+    // ignore empty / whitespace-only todos
+    if (input.value.trim() === '') return;
     createLi(input.value);
     Todos.push(input.value)
     // add to local storage
@@ -37,5 +39,7 @@ form.addEventListener('submit', (e) => {
 
 clear.addEventListener('click', () => {
     localStorage.clear();
+    // also empty the in-memory list, otherwise the next add saves the cleared todos again
+    Todos.length = 0;
     ul.innerHTML = ''
 })

@@ -42,6 +42,11 @@ main {
     flex-wrap: wrap;
 }
 
+.message {
+    color: #eee;
+    padding: 1rem;
+}
+
 .movie {
     background-color: #373b69;
     border-radius: 3px;

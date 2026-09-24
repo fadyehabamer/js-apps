@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daily prayer times for any city from the Aladhan API, with a countdown to the next prayer in Arabic or English.">
+    <title>Prayer Times</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main class="container">
+        <header class="page-header">
+            <h1>Prayer Times</h1>
+            <p class="subtitle">Today's prayer times for a city, from the Aladhan API.</p>
+        </header>
+
+        <form id="city-form" class="card search">
+            <div class="field">
+                <label for="city">City</label>
+                <input type="text" id="city" name="city" autocomplete="address-level2" placeholder="Cairo" required>
+            </div>
+            <div class="field">
+                <label for="country">Country</label>
+                <input type="text" id="country" name="country" autocomplete="country-name" placeholder="Egypt" required>
+            </div>
+            <div class="field">
+                <label for="method">Calculation method</label>
+                <select id="method" name="method">
+                    <option value="5">Egyptian General Authority of Survey</option>
+                    <option value="4">Umm al-Qura, Makkah</option>
+                    <option value="8">Gulf Region</option>
+                    <option value="3">Muslim World League</option>
+                    <option value="2">ISNA (North America)</option>
+                    <option value="1">University of Islamic Sciences, Karachi</option>
+                </select>
+            </div>
+            <button type="submit" id="submit-btn">Get times</button>
+        </form>
+
+        <section class="card results" id="results" aria-labelledby="results-title">
+            <h2 id="results-title">Times</h2>
+            <p class="meta" id="date-line"></p>
+            <ul class="times" id="times-list"></ul>
+        </section>
+    </main>
+</body>
+
+</html>

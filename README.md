@@ -1,5 +1,7 @@
 # js-apps
 
+[![CI](https://github.com/fadyehabamer/js-apps/actions/workflows/ci.yml/badge.svg)](https://github.com/fadyehabamer/js-apps/actions/workflows/ci.yml)
+
 > Vanilla-JS apps with UI — tools, generators, utilities
 
 **14 demos** · 🔗 **[Live gallery](https://fadyehabamer.github.io/js-apps/)** — every demo is deployed to GitHub Pages.
